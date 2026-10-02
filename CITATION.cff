@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper and the software release."
+title: "When does diversity help in active learning? Code, benchmark engine and analysis pipeline"
+authors:
+  - family-names: "Bertrand-Bonvillain"
+    given-names: "Erwan"
+    affiliation: "Orléans University, INSA-CVL, PRISME UR 4229"
+  - family-names: "Nasser"
+    given-names: "Yassine"
+    affiliation: "Orléans University, INSA-CVL, PRISME UR 4229"
+  - family-names: "Ros"
+    given-names: "Frédéric"
+    affiliation: "Orléans University, INSA-CVL, PRISME UR 4229"
+version: 1.0.0
+license: MIT
+repository-code: "https://github.com/frederic-ros/when-does-diversity-help"
+preferred-citation:
+  type: article
+  title: "When does diversity help in active learning? A large-scale empirical study of uncertainty, diversity and worst-case risk"
+  authors:
+    - family-names: "Bertrand-Bonvillain"
+      given-names: "Erwan"
+    - family-names: "Nasser"
+      given-names: "Yassine"
+    - family-names: "Ros"
+      given-names: "Frédéric"
+  journal: "Neurocomputing (submitted)"
+  year: 2026

@@ -1,0 +1,428 @@
+{
+  "protocol_version": "2.0",
+  "description": "Single source of truth for the benchmark. Any change here changes the config hash stored in every run record; runs with a different hash are never mixed by the analysis.",
+  "seeds": {
+    "base": 42,
+    "stride": 17,
+    "note": "split s uses root seed base + stride*s; independent child streams (data, split, init, model, strategy) are derived with numpy SeedSequence."
+  },
+  "classifiers": {
+    "lr": {
+      "class": "sklearn.linear_model.LogisticRegression",
+      "params": {
+        "max_iter": 2000
+      }
+    },
+    "rf": {
+      "class": "sklearn.ensemble.RandomForestClassifier",
+      "params": {
+        "n_estimators": 50,
+        "n_jobs": 1
+      }
+    }
+  },
+  "uncertain_band": {
+    "taus": [
+      0.05,
+      0.1,
+      0.2,
+      0.3
+    ],
+    "primary_tau": 0.1,
+    "geometry_top_fraction": 0.2,
+    "geometry_rounds": [
+      0
+    ],
+    "note": "margin m(x) = p(1)(x) - p(2)(x). Band U_tau = {x in pool : m(x) < tau}; width = |U_tau|/|pool|. Logged at every round. Effective dimension and clusterability of the lowest-margin 20% are logged at geometry_rounds only (costly)."
+  },
+  "regimes": {
+    "synthetic": {
+      "splits": 20,
+      "test_size": 0.3,
+      "n_init": 20,
+      "batch_size": 20,
+      "max_budget": 480,
+      "max_samples": null,
+      "source": "sklearn.datasets.make_classification, regenerated per split with the split data seed",
+      "datasets": {
+        "easy": {
+          "n_samples": 1500,
+          "n_classes": 3,
+          "n_features": 20,
+          "n_informative": 12,
+          "n_redundant": 4,
+          "class_sep": 1.5,
+          "flip_y": 0.01
+        },
+        "medium": {
+          "n_samples": 1500,
+          "n_classes": 3,
+          "n_features": 20,
+          "n_informative": 10,
+          "n_redundant": 6,
+          "class_sep": 1.2,
+          "flip_y": 0.02
+        },
+        "hard": {
+          "n_samples": 1500,
+          "n_classes": 3,
+          "n_features": 30,
+          "n_informative": 10,
+          "n_redundant": 15,
+          "class_sep": 0.8,
+          "flip_y": 0.05
+        },
+        "imbalanced": {
+          "n_samples": 1500,
+          "n_classes": 3,
+          "n_features": 30,
+          "n_informative": 12,
+          "n_redundant": 8,
+          "class_sep": 1.0,
+          "flip_y": 0.03,
+          "weights": [
+            0.7,
+            0.2,
+            0.1
+          ]
+        },
+        "imbalanced_hard": {
+          "n_samples": 1500,
+          "n_classes": 3,
+          "n_features": 30,
+          "n_informative": 10,
+          "n_redundant": 10,
+          "class_sep": 0.8,
+          "flip_y": 0.05,
+          "weights": [
+            0.75,
+            0.18,
+            0.07
+          ]
+        },
+        "clean20": {
+          "n_samples": 1500,
+          "n_classes": 3,
+          "n_features": 20,
+          "n_informative": 20,
+          "n_redundant": 0,
+          "class_sep": 1.0,
+          "flip_y": 0.01
+        },
+        "redundant20": {
+          "n_samples": 1500,
+          "n_classes": 3,
+          "n_features": 20,
+          "n_informative": 8,
+          "n_redundant": 8,
+          "class_sep": 1.0,
+          "flip_y": 0.02
+        },
+        "noisy_medium": {
+          "n_samples": 1500,
+          "n_classes": 3,
+          "n_features": 30,
+          "n_informative": 12,
+          "n_redundant": 8,
+          "class_sep": 1.0,
+          "flip_y": 0.06
+        },
+        "medium5c": {
+          "n_samples": 1500,
+          "n_classes": 5,
+          "n_features": 30,
+          "n_informative": 15,
+          "n_redundant": 8,
+          "class_sep": 1.0,
+          "flip_y": 0.03
+        },
+        "low_signal": {
+          "n_samples": 1500,
+          "n_classes": 3,
+          "n_features": 30,
+          "n_informative": 8,
+          "n_redundant": 8,
+          "class_sep": 0.6,
+          "flip_y": 0.03
+        },
+        "many_classes": {
+          "n_samples": 1500,
+          "n_classes": 8,
+          "n_features": 40,
+          "n_informative": 20,
+          "n_redundant": 10,
+          "class_sep": 1.0,
+          "flip_y": 0.03
+        },
+        "clustered_imbalanced": {
+          "n_samples": 2000,
+          "n_classes": 4,
+          "n_features": 40,
+          "n_informative": 14,
+          "n_redundant": 10,
+          "n_repeated": 2,
+          "n_clusters_per_class": 3,
+          "class_sep": 0.9,
+          "flip_y": 0.03,
+          "weights": [
+            0.55,
+            0.25,
+            0.15,
+            0.05
+          ]
+        },
+        "highdim_sparse": {
+          "n_samples": 2000,
+          "n_classes": 3,
+          "n_features": 200,
+          "n_informative": 12,
+          "n_redundant": 20,
+          "n_repeated": 0,
+          "class_sep": 1.0,
+          "flip_y": 0.02
+        },
+        "local_overlap": {
+          "n_samples": 1800,
+          "n_classes": 3,
+          "n_features": 35,
+          "n_informative": 14,
+          "n_redundant": 10,
+          "n_clusters_per_class": 4,
+          "class_sep": 0.7,
+          "flip_y": 0.02
+        },
+        "extreme_redundancy": {
+          "n_samples": 1800,
+          "n_classes": 3,
+          "n_features": 80,
+          "n_informative": 8,
+          "n_redundant": 50,
+          "class_sep": 1.0,
+          "flip_y": 0.02
+        },
+        "rare_class": {
+          "n_samples": 2500,
+          "n_classes": 4,
+          "n_features": 40,
+          "n_informative": 15,
+          "n_redundant": 10,
+          "class_sep": 1.0,
+          "flip_y": 0.01,
+          "weights": [
+            0.8,
+            0.12,
+            0.06,
+            0.02
+          ]
+        }
+      }
+    },
+    "tabular": {
+      "splits": 20,
+      "test_size": 0.3,
+      "n_init": 20,
+      "batch_size": 20,
+      "max_budget": 400,
+      "max_samples": 3000,
+      "data_dir": "tab/reeltabulaire",
+      "dataset_overrides": {
+        "letter_recognition": {
+          "n_init": 40,
+          "note": "26 classes: the stratified initial set needs >= 1 point per class; 40 keeps the 20-step grid (40..400)."
+        }
+      },
+      "source": "OpenML-derived .txt files (tab-separated, label = last column), archived on Zenodo",
+      "datasets": {
+        "airquality": "Airquality.txt",
+        "magic_telescope": "MagicTelescope.txt",
+        "skin_nonskin": "Skin_NonSkin.txt",
+        "covertype": "covertype_original.txt",
+        "credit_default": "credit_default_original.txt",
+        "dry_bean": "dry_bean_original.txt",
+        "electricity": "electricity_original.txt",
+        "har": "har.txt",
+        "letter_recognition": "letter_recognition_original.txt",
+        "madelon": "madelon.txt",
+        "mammography": "mammography.txt",
+        "online_shoppers": "online_shoppers_original.txt",
+        "pendigits": "pendigits.txt",
+        "rice": "rice_original.txt",
+        "shuttle": "shuttle.txt"
+      }
+    },
+    "latent": {
+      "splits": 20,
+      "test_size": 0.3,
+      "n_init": 50,
+      "batch_size": 50,
+      "max_budget": 1200,
+      "max_samples": 5000,
+      "data_dir": "latent",
+      "source": "ResNet-18 penultimate-layer features + PCA, archived on Zenodo (encoder: see data card)",
+      "datasets": {
+        "mnist_pca10": "latent_pca10H3/minsttrainpca10.txt",
+        "mnist_pca20": "latent_pca20H3/minsttrainpca20.txt",
+        "mnist_pca50": "latent_pca50H3/minsttrainpca50.txt",
+        "mnist_pca100": "latent_pca100H3/minsttrainpca100.txt",
+        "fashion_pca10": "latent_pca10H3/fashiontrainpca10.txt",
+        "fashion_pca20": "latent_pca20H3/fashiontrainpca20.txt",
+        "fashion_pca50": "latent_pca50H3/fashiontrainpca50.txt",
+        "fashion_pca100": "latent_pca100H3/fashintrainpca100.txt",
+        "cifar10_pca10": "latent_pca10H3/cifar10trainpca10.txt",
+        "cifar10_pca20": "latent_pca20H3/cifartrainpca20.txt",
+        "cifar10_pca50": "latent_pca50H3/cifar10trainpca50.txt",
+        "cifar10_pca100": "latent_pca100H3/cifar10trainpca100.txt"
+      }
+    }
+  },
+  "panel": {
+    "main": {
+      "random": [
+        "random",
+        {}
+      ],
+      "margin": [
+        "margin",
+        {}
+      ],
+      "entropy": [
+        "entropy",
+        {}
+      ],
+      "least_confident": [
+        "least_confident",
+        {}
+      ],
+      "coreset_greedy": [
+        "coreset_greedy",
+        {}
+      ],
+      "coreset_kmeanspp": [
+        "coreset_kmeanspp",
+        {}
+      ],
+      "typiclust": [
+        "typiclust",
+        {
+          "neighbors": 5
+        }
+      ],
+      "probcover": [
+        "probcover",
+        {
+          "delta_quantile": 0.1,
+          "knn_k": 10
+        }
+      ],
+      "badge": [
+        "badge_approx",
+        {}
+      ],
+      "unc_feature_kmeans": [
+        "unc_feature_kmeans",
+        {
+          "uncertainty_metric": "margin",
+          "n_clusters_factor": 3
+        }
+      ],
+      "diversity_opt_batch": [
+        "diversity_optimized_batch",
+        {
+          "uncertainty_metric": "margin",
+          "lambda_diversity": 0.5
+        }
+      ],
+      "qbc": [
+        "qbc",
+        {
+          "n_committee": 5,
+          "bootstrap_ratio": 1.0,
+          "metric": "vote_entropy"
+        }
+      ],
+      "robust_qbc": [
+        "robust_qbc",
+        {
+          "n_committee": 5,
+          "bootstrap_ratio": 0.8,
+          "metric": "confidence_weighted"
+        }
+      ],
+      "tri_committee": [
+        "tri_committee",
+        {
+          "bootstrap_ratio": 1.0,
+          "mode": "two_vs_one"
+        }
+      ],
+      "adaptive_disagreement": [
+        "adaptive_disagreement",
+        {
+          "n_committee": 5,
+          "min_disagreement": 0.2
+        }
+      ],
+      "dbal": [
+        "dbal",
+        {
+          "method": "margin",
+          "dbal_factor": 5
+        }
+      ],
+      "rank2022": [
+        "rank2022",
+        {
+          "s_factor": 10,
+          "linkage": "ward",
+          "loss": "margin"
+        }
+      ]
+    },
+    "extras": {
+      "router": [
+        "ActivePseudoLabelV58",
+        {
+          "variant": "V58b",
+          "multiclass_thr": 5,
+          "u_flat_trigger": 0.5,
+          "eff_dim_thr": 12.0,
+          "peak_lo": 0.58,
+          "route_round": 1,
+          "correction_round": 3,
+          "hysteresis": 0.05,
+          "kmeans_n_init": "auto"
+        }
+      ],
+      "walc_fixed": [
+        "bench.walc_fixed",
+        {}
+      ],
+      "dualselect": [
+        "external.dualselect",
+        {
+          "n_exploration": 150,
+          "candidate_multiplier": 5,
+          "w_d_max": 0.5,
+          "w_g_max": 0.3,
+          "alpha_d": 1.0,
+          "alpha_g": 1.0,
+          "use_entropy": false,
+          "use_convergence": false
+        }
+      ],
+      "dbal_dualselect": [
+        "external.dualselect",
+        {
+          "cls": "dualselect.competitors.dbal.DBALStrategy"
+        }
+      ]
+    },
+    "note": "'main' is the 17-strategy panel of the paper. 'extras' holds the router (standalone V58, the only version shipped) and WALC as a fixed mode, so that the router can be compared fairly to all three modes it routes over. Extras are run by default so that the decision to report the router can be taken at analysis time without re-running. 'dualselect' runs the released DualSelect package (KBS 2026) through an adapter (src/alframework/bench/external.py): shared initial set, masked pool labels, exact batch size; hyper-parameters are those of the DualSelect paper (benchmarks/config.py of the dualselect repository). 'dbal_dualselect' is the DBAL implementation released with DualSelect (least-confidence uncertainty, unweighted k-means), run to reconcile the rankings of the two papers."
+  },
+  "external_dependencies": {
+    "dualselect": {
+      "repository": "https://github.com/frederic-ros/dualselect",
+      "commit": "4f09ff6c16f65d061bd672d52d02f7206db75bb6"
+    }
+  }
+}
