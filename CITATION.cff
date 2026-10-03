@@ -13,6 +13,10 @@ authors:
     affiliation: "Orléans University, INSA-CVL, PRISME UR 4229"
 version: 1.0.0
 license: MIT
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.23114601"
+    description: "Run records and input data (Zenodo)"
 repository-code: "https://github.com/frederic-ros/when-does-diversity-help"
 preferred-citation:
   type: article

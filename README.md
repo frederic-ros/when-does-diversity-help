@@ -21,7 +21,7 @@ This repository contains everything needed to
 3. **re-run the benchmark** itself from a single protocol file.
 
 The run records and the input data are archived on Zenodo
-(DOI: [10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX)).
+(DOI: [10.5281/zenodo.23114601](https://doi.org/10.5281/zenodo.23114601)).
 See [`REPRODUCE.md`](REPRODUCE.md) for the step-by-step procedure and the mapping
 between output files and paper artifacts.
 

@@ -27,7 +27,7 @@ pip install -r analysis/requirements.txt
 The campaign was run with Python 3.11, numpy 2.4, scipy 1.17 and scikit-learn 1.9
 (`environment.txt`).
 
-## 2. Get the data (Zenodo, DOI in the paper)
+## 2. Get the data (Zenodo, DOI [10.5281/zenodo.23114601](https://doi.org/10.5281/zenodo.23114601))
 
 ```
 records/                         one JSON record per run (36,120 files)
